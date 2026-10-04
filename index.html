@@ -1185,7 +1185,7 @@ function handleBlackHoleLogic(){
 
   if (blackHoleCount === 1) {
     t1.textContent = '♟️：看来您遇到了一些问题';
-    t2.textContent = '♟️：点击下方按钮，您可以回到购物界面';
+    t2.textContent = '♟️：点击下方按钮，您就可以返回了';
     popup.classList.add('show');
   } else if (blackHoleCount === 2) {
     t1.textContent = '♟️：看来您的好奇心真的很旺盛';
@@ -1202,19 +1202,28 @@ function handleBlackHoleLogic(){
     // 第4次：直接自动恢复
     closeBlackHolePopup();
     closeBlackHoleScreen();
-    toast('网站恢复正常');
+    toast('♟️：网站已恢复正常');
   } else {
     // 第5次及以上：50%概率自动恢复，50%概率显示弹窗手动返回
-    if (Math.random() < 0.5) {
-      closeBlackHolePopup();
-      closeBlackHoleScreen();
-      toast('网站恢复正常');
+    // 第5次及以上
+    const rand = Math.random();
+    
+    if (rand < 0.2) {
+        closeBlackHolePopup();
+        closeBlackHoleScreen();
+        toast('♟️：请不要继续尝试了');
+    } else if (rand < 0.4) {
+        t1.textContent = '♟️：……';
+        t2.textContent = '♟️：这次不够幸运对吗？';
+        popup.classList.add('show');
+    } else if (rand < 0.6) { 
+        t1.textContent = '♟️：又见面了';
+        t2.textContent = '♟️：或许你应该记得这是第几次';
+        popup.classList.add('show');
     } else {
-      t1.textContent = '♟️：……';
-      t2.textContent = '♟️：这次没那么幸运，点击返回吧';
-      popup.classList.add('show');
+        toast('网站已崩溃');
     }
-  }
+}
 }
 function closeBlackHolePopup(){document.getElementById('holePopup').classList.remove('show');}
 function closeBlackHoleScreen(){document.getElementById('blackHoleScreen').classList.remove('show');}
